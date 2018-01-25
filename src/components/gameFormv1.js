@@ -58,6 +58,7 @@ export default class Game extends React.Component {
 
     printSomething(e){
         console.log('I am printing e', e);
+        console.log(e[0].value);
     }
 
     render(){
@@ -71,4 +72,3 @@ export default class Game extends React.Component {
         );
     }
 }
-

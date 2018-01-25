@@ -4,7 +4,7 @@ import './guess-form.css';
 
 export default function GuessForm(props) {
     return (
-        <form onSubmit = {(e) => {e.preventDefault(); return props.feedback(e.target.value)}}>
+        <form onSubmit = {(e) => {e.preventDefault(); return props.feedback(e.target)}}>
             <input type="text" name="userGuess" id="userGuess"
                 className="text" maxLength="3" autoComplete="off"
                 placeholder="Enter your Guess" required />
@@ -12,4 +12,3 @@ export default function GuessForm(props) {
         </form>
     );
 };
-
