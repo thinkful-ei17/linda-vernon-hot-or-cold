@@ -27,7 +27,7 @@ export default class Game extends React.Component {
         let distance = Math.abs(answer-guess);
         if(answer === parseInt(guess)){
             return 'You got it!'
-        }   
+        }
         else if (distance >= 50){
             return 'You are ice cold!'
         }
@@ -72,4 +72,3 @@ export default class Game extends React.Component {
         );
     }
 }
-

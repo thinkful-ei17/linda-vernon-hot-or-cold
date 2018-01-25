@@ -18,10 +18,18 @@ export default class GuessForm extends React.Component {
         console.log(this.state.value);
     }
 
+    handleOnSubmit(event) {
+
+      event.preventDefault();
+      this.props.feedback(this.state.value);
+      this.setState({value: ''});
+
+    }
+
 
     render() {
     return (
-        <form onSubmit={(e)=> {e.preventDefault(); this.props.feedback(this.state.value); this.setState({value: ''})}}>
+        <form onSubmit={(e)=> {this.handleOnSubmit(e)}}>
             <input value={this.state.value} onChange={this.handleChange} type="text" name="userGuess" id="userGuess"
                 className="text" maxLength="3" autoComplete="off"
                 placeholder="Enter your Guess" required />
@@ -30,6 +38,3 @@ export default class GuessForm extends React.Component {
     );
     }
 };
-
-
-
