@@ -23,19 +23,19 @@ export default class Game extends React.Component {
     }
 
     updateFeedback(number, guess){
-        let answer = number;
+        let answer = parseInt(number);
         let distance = Math.abs(answer-guess);
-        if(distance >= 50){
+        if(answer === parseInt(guess)){
+            return 'You got it!'
+        }   
+        else if (distance >= 50){
             return 'You are ice cold!'
         }
-        else if(distance >=30 && distance < 50){
+        else if(distance < 50 && distance >=30 ){
             return 'You are cold!'
         }
-        else if(distance > 10 && distance < 30){
+        else if(distance < 30 && distance > 10 ){
             return 'You are warm!'
-        }
-        else if(answer === guess){
-            return 'You got it!'
         }
         else if(distance <= 10) {
             return 'You are hot!!!'
@@ -45,28 +45,29 @@ export default class Game extends React.Component {
         }
     }
 
-
-    updateAll(guessNumber){
-        if(this.updateFeedback(this.state.randomNumber, guessNumber) === 'You got it'){
-            //reset
-            this.setState({guessNumber: null, randomNumber: this.setRandomNumber(), feedback: 'Make your guess!'})
-        }
-        else {
-            this.setState({guessList: [...this.state.guessList, guessNumber], message: this.updateFeedback(this.state.randomNumber, guessNumber), count: this.state.guessList.length})
-        }
+    resetState(){
+        this.setState({guessNumber: null, randomNumber: this.setRandomNumber(), feedback: 'Make your guess!', guessList: [], count: 0})
+        console.log('is resetState done');
     }
 
-    printSomething(e){
-        console.log('I am printing e', e);
+
+    updateAll(guessNumber){
+        if(this.updateFeedback(this.state.randomNumber, guessNumber) === 'You got it!'){
+            this.setState({feedback: this.updateFeedback(this.state.randomNumber, guessNumber)})
+        }
+        else {
+            this.setState({guessList: [...this.state.guessList, guessNumber], feedback: this.updateFeedback(this.state.randomNumber, guessNumber), count: [...this.state.guessList, guessNumber].length})
+            console.log(this.state.randomNumber);
+        }
     }
 
     render(){
         return (
             <div>
-                <Header />
-                <GuessSection feedback={(guessNumber) => {this.printSomething(guessNumber)}} />
-                <GuessCount count={3} />
-                <GuessList guesses={[10, 15, 25]} />
+                <Header reset={() => this.resetState()}/>
+                <GuessSection feedback={(guessNumber) => {this.updateAll(guessNumber)}} message={this.state.feedback} />
+                <GuessCount count={this.state.count} />
+                <GuessList guesses={this.state.guessList} />
             </div>
         );
     }
