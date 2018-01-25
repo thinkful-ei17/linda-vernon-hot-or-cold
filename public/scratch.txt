@@ -3,3 +3,13 @@ Game
     Guess Form
   Guess Count
   Guess List
+
+
+User can input number (e.currentTarget.value (li) v. e.target.value (ul)) 
+User clicks submit, which triggers us to obtain/use guess number (onSubmit, pass prop of input number (e.currentTarger.value))
+take guess number and compare to randomNumber (callback function updateAll - should know if guess is correct or not; then perform additional functionality)
+Change message based on hot/cold
+  if guessed right = message correct
+  else guess wrong 
+      increment count by 1
+      add guessed number to array of guessed numbers

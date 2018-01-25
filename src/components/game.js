@@ -57,7 +57,6 @@ export default class Game extends React.Component {
     }
 
     printSomething(e){
-        e.preventDefault();
         console.log('I am printing e', e);
     }
 
